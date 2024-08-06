@@ -16,7 +16,7 @@ export class LoginService {
       'Content-Type': 'application/x-www-form-urlencoded',
       "Authorization": "Basic " + btoa(creds.client_id + ':' + creds.client_secret),
       'scope': 'api'
-  });
+    });
     return this.http.post(TOKEN_ENDPOINT, 'grant_type=client_credentials', {headers: httpHeaders});
   }
 }

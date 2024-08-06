@@ -1,0 +1,42 @@
+:host {
+  width: 100%;
+
+  .table-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 56px;
+
+    mat-form-field {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 30%;
+
+      .mat-mdc-form-field-subscript-wrapper {
+        display: none!important;
+      }
+    }
+
+    mat-paginator {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  table {
+    width: 100%;
+
+    th.mat-sort-header-sorted {
+      color: black;
+    }
+
+    .mat-mdc-row:nth-child(even) {
+      background-color: #8f8c8c;
+    }
+  }
+}
+
+.single-row {
+  height: 50px;
+}

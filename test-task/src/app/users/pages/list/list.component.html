@@ -1,8 +1,19 @@
 <mat-card>
   <mat-card-header>
     Users list
+    <button (click)="addPerson()" mat-flat-button color="primary"><mat-icon>group_add</mat-icon> Add new user</button>
   </mat-card-header>
   <mat-card-content>
-
+    <div class="search-wrapper">
+      <mat-form-field appearance="fill">
+        <mat-label>Search(First and Last name)</mat-label>
+        <input matInput autocomplete="off" [ngModel]="filter" (ngModelChange)="changeModel($event)" type="text">
+      </mat-form-field>
+      <div class="search-buttons">
+        <button (click)="searchFilter()" [disabled]="!filter" mat-flat-button color="primary"><mat-icon>search</mat-icon> Search</button>
+        <button (click)="refresh()" mat-stroked-button color="primary"><mat-icon>refresh</mat-icon> Refresh list</button>
+      </div>
+    </div>
+    <app-universal-datatable [enablePaging]="true" [displayedColumns]="columns" [tableData]="tableData"></app-universal-datatable>
   </mat-card-content>
 </mat-card>

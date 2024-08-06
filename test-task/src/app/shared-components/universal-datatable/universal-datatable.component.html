@@ -1,0 +1,27 @@
+<div class="mat-elevation-z8">
+  <div class="table-top">
+    <mat-paginator #paginator
+                   *ngIf="enablePaging"
+                   [pageSize]="10"
+                   showFirstLastButtons>
+    </mat-paginator>
+  </div>
+  <table mat-table [fixedLayout]="true" [dataSource]="dataSource?.data.length > 0 ? dataSource : emptyData" matSort class="mat-elevation-z8">
+
+    <ng-container *ngFor="let disCol of displayedColumns; let colIndex = index" [matColumnDef]="disCol.value">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>{{disCol.title}}</th>
+      <td mat-cell *matCellDef="let element"> {{element[disCol.value]}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="empty-row">
+      <mat-cell *matCellDef="let element" class="single-row">No data to display.</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="loading-row">
+      <mat-cell *matCellDef="let element" class="single-row">Loading data in progress...</mat-cell>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToShow; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: dataSource ? dataSource?.data.length > 0 ? columnsToShow : ['empty-row'] : ['loading-row']"></tr>
+  </table>
+</div>
