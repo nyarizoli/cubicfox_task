@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-header>
-    Users list
+    User list
     <button (click)="addPerson()" mat-flat-button color="primary"><mat-icon>group_add</mat-icon> Add new user</button>
   </mat-card-header>
   <mat-card-content>
@@ -11,6 +11,7 @@
       </mat-form-field>
       <div class="search-buttons">
         <button (click)="searchFilter()" [disabled]="!filter" mat-flat-button color="primary"><mat-icon>search</mat-icon> Search</button>
+        <button (click)="clearFilter()" mat-stroked-button color="primary"><mat-icon>close</mat-icon> Clear filter</button>
         <button (click)="refresh()" mat-stroked-button color="primary"><mat-icon>refresh</mat-icon> Refresh list</button>
       </div>
     </div>

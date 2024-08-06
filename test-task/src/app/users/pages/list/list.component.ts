@@ -59,9 +59,11 @@ export class ListComponent extends StoreManagerComponent implements OnInit, OnDe
   }
 
   ngOnInit(): void {
+    this.setLoading(true);
     this.subscriptions.push(
       this.userService.getUserList().subscribe(list => {
         this.tableData = list
+        this.setLoading(false);
       })
     )
   }
@@ -81,14 +83,34 @@ export class ListComponent extends StoreManagerComponent implements OnInit, OnDe
   }
 
   refresh(): void {
+    if (this.filter) {
+      this.setLoading(true);
+      this.subscriptions.push(
+        this.userService.searchUserList(this.filter).subscribe(list => {
+          this.tableData = list
+          this.setLoading(false);
+        })
+      )
+    } else {
+      this.setLoading(true);
+      this.subscriptions.push(
+        this.userService.getUserList().subscribe(list => {
+          this.tableData = list
+          this.setLoading(false);
+        })
+      )
+    }
+  }
+
+  clearFilter(): void {
+    this.filter = '';
     this.setLoading(true);
-    this.subscriptions.push(
-      this.userService.getUserList().subscribe(list => {
-        this.tableData = list
-        this.setLoading(false);
-        this.filter = ''
-      })
-    )
+      this.subscriptions.push(
+        this.userService.getUserList().subscribe(list => {
+          this.tableData = list
+          this.setLoading(false);
+        })
+      )
   }
 
   addPerson(): void {}
