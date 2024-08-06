@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AbsencesRoutingModule } from './absences-routing.module';
 import { ListComponent } from './pages/list/list.component';
+import { MaterialModule } from '../material.module';
 
 
 
@@ -11,7 +12,8 @@ import { ListComponent } from './pages/list/list.component';
   ],
   imports: [
     CommonModule,
-    AbsencesRoutingModule
+    AbsencesRoutingModule,
+    MaterialModule
   ]
 })
 export class AbsencesModule { }

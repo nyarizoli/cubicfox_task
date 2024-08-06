@@ -1,1 +1,22 @@
-<p>authentication works!</p>
+<mat-card>
+  <mat-card-header>
+    Authorization
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="authFormGroup">
+        <mat-form-field appearance="fill">
+          <mat-label>Client ID</mat-label>
+          <input matInput formControlName="client_id">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Client secret</mat-label>
+          <input matInput formControlName="client_secret">
+        </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button *ngIf="!loggedIn()" (click)="loginCustom()" [disabled]="!authFormGroup.valid" mat-button color="primary"><mat-icon>send</mat-icon> Authorize with custom credentials</button>
+    <button *ngIf="!loggedIn()" (click)="login()" mat-button color="primary"><mat-icon>security</mat-icon> Authorize with default credentials</button>
+    <button *ngIf="loggedIn()" (click)="logout()" mat-button color="primary"><mat-icon>keyboard_tab</mat-icon> Log out</button>
+  </mat-card-actions>
+</mat-card>

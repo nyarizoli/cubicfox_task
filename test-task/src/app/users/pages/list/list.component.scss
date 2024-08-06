@@ -1,0 +1,14 @@
+:host {
+  margin: 1rem;
+
+  mat-card {
+    mat-card-header {
+      height: 40px;
+      background-color: lightgray;
+    }
+
+    mat-card-content {
+      margin-top: 1rem;
+    }
+  }
+}

@@ -16,6 +16,10 @@ export class AuthService {
     return localStorage.getItem(TOKEN_KEY);
   }
 
+  removeToken(): void {
+    localStorage.removeItem(TOKEN_KEY);
+  }
+
   isLoggedIn(): boolean {
     return !!localStorage.getItem(TOKEN_KEY);
   }
