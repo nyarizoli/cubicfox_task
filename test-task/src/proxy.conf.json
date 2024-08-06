@@ -1,0 +1,14 @@
+{
+  "/api/*": {
+  "target": "https://api4.allhours.com/",
+  "secure": false,
+  "logLevel":"debug",
+  "changeOrigin": true
+  },
+  "/connect/*": {
+  "target": "https://login.allhours.com/",
+  "secure": false,
+  "logLevel":"debug",
+  "changeOrigin": true
+  }
+}

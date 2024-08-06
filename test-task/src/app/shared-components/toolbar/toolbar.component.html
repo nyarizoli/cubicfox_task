@@ -12,18 +12,5 @@
       person_outline
     </mat-icon>
     {{getUsername()}}
-    <div #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="menu">
-      <button mat-icon-button>
-        <mat-icon>
-          {{menuTrigger.menuOpen ? 'expand_less' : 'expand_more'}}
-        </mat-icon>
-      </button>
-    </div>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="logout()">
-        <mat-icon>keyboard_tab</mat-icon>
-        Logout
-      </button>
-    </mat-menu>
   </mat-toolbar-row>
 </mat-toolbar>

@@ -18,8 +18,6 @@ export class ToolbarComponent extends StoreManagerComponent implements OnInit, O
 
   ngOnInit() {}
 
-  logout(): void {}
-
   getUsername(): string | null {
     return localStorage.getItem(USERNAME_KEY);
   }

@@ -14,6 +14,7 @@ import { NavbarComponent } from './shared-components/navbar/navbar.component';
 import { ToolbarComponent } from './shared-components/toolbar/toolbar.component';
 import { StoreModule } from '@ngrx/store';
 import { REDUCERS } from './store/reducers/reducers';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { REDUCERS } from './store/reducers/reducers';
   ],
   providers: [
     provideAnimationsAsync(),
+    provideHttpClient(),
     {provide: ErrorHandler, useClass: GlobalErrorHandlerService},
     MessageNotificationService
   ],

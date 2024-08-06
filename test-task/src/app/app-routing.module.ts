@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './shared-components/layout/layout.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -13,10 +14,12 @@ const routes: Routes = [
       },
       {
         path: 'users',
+        canActivate: [AuthGuard],
         loadChildren: () => import('./users/users.module').then(u => u.UsersModule)
       },
       {
         path: 'absences',
+        canActivate: [AuthGuard],
         loadChildren: () => import('./absences/absences.module').then(a => a.AbsencesModule)
       },
       {
