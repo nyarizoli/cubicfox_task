@@ -39,7 +39,9 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "@angular/material/prebuilt-themes/azure-blue.css",
+              "src/styles.scss",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css"
             ],
             "scripts": []
           },
@@ -104,7 +106,9 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "@angular/material/prebuilt-themes/azure-blue.css",
+              "src/styles.scss",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css"
             ],
             "scripts": []
           }

@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+.success {
+  background-color: forestgreen!important;
+}
+
+.error {
+  background-color: red!important;
+}
+
+.mat-mdc-snack-bar-container {
+  &.error {
+    --mdc-snackbar-container-color: red;
+    --mat-mdc-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+}
+
+.mat-mdc-snack-bar-container {
+  &.success {
+    --mdc-snackbar-container-color: forestgreen;
+    --mat-mdc-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
