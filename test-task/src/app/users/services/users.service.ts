@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UsersModule } from '../users.module';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { USER_LIST_ENDPOINT, USER_LIST_SEARCH_ENDPOINT } from '../../utils/constants/endpoints/users/constants';
 import { AuthService } from '../../services/auth.service';
@@ -13,37 +13,30 @@ import { AbsenceCreateItem, AbsenceDefinitionItem, AbsenceItem } from '../../sto
 })
 export class UsersService {
 
-  httpHeaders!: HttpHeaders;
-
-  constructor(private http: HttpClient, private authService: AuthService) {
-    this.httpHeaders = new HttpHeaders({
-      'Content-Type': 'application/json',
-      "Authorization": `Bearer ${this.authService.getToken()}`,
-    });
-  }
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   getUserList(): Observable<UserItem[]> {
-    return this.http.get<UserItem[]>(USER_LIST_ENDPOINT, {headers: this.httpHeaders});
+    return this.http.get<UserItem[]>(USER_LIST_ENDPOINT);
   }
 
   searchUserList(searchTerm: string): Observable<UserItem[]> {
-    return this.http.get<UserItem[]>(`${USER_LIST_SEARCH_ENDPOINT}?searchTerm=${searchTerm}`, {headers: this.httpHeaders});
+    return this.http.get<UserItem[]>(`${USER_LIST_SEARCH_ENDPOINT}?searchTerm=${searchTerm}`);
   }
 
   addUser(userToAdd: UserItem): Observable<any> {
-    return this.http.post(USER_LIST_ENDPOINT, userToAdd, {headers: this.httpHeaders});
+    return this.http.post(USER_LIST_ENDPOINT, userToAdd);
   }
 
   getUserAbsenceList(searchTerm: string): Observable<AbsenceItem[]> {
-    return this.http.get<AbsenceItem[]>(`${ABSENCES_LIST_ENDPOINT}?searchTerm=${searchTerm}`, {headers: this.httpHeaders}).pipe(map((data: AbsenceItem[]) => this.mapListData(data)));
+    return this.http.get<AbsenceItem[]>(`${ABSENCES_LIST_ENDPOINT}?searchTerm=${searchTerm}`).pipe(map((data: AbsenceItem[]) => this.mapListData(data)));
   }
 
   getAbsenceDefinitionList(): Observable<AbsenceDefinitionItem[]> {
-    return this.http.get<AbsenceDefinitionItem[]>(ABSENCES_DEFINITION_LIST_ENDPOINT, {headers: this.httpHeaders});
+    return this.http.get<AbsenceDefinitionItem[]>(ABSENCES_DEFINITION_LIST_ENDPOINT);
   }
 
   createAbsence(toSave: AbsenceCreateItem): Observable<any> {
-    return this.http.post(ABSENCES_LIST_ENDPOINT, toSave, {headers: this.httpHeaders});
+    return this.http.post(ABSENCES_LIST_ENDPOINT, toSave);
   }
 
   private mapListData(data: AbsenceItem[]): AbsenceItem[] {

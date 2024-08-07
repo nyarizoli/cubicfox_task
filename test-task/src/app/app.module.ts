@@ -14,8 +14,9 @@ import { NavbarComponent } from './shared-components/navbar/navbar.component';
 import { ToolbarComponent } from './shared-components/toolbar/toolbar.component';
 import { StoreModule } from '@ngrx/store';
 import { REDUCERS } from './store/reducers/reducers';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import {provideNativeDateAdapter} from '@angular/material/core';
+import { authInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,9 @@ import {provideNativeDateAdapter} from '@angular/material/core';
   ],
   providers: [
     provideAnimationsAsync(),
-    provideHttpClient(),
+    provideHttpClient(
+      withInterceptors([authInterceptor]),
+    ),
     provideNativeDateAdapter(),
     {provide: ErrorHandler, useClass: GlobalErrorHandlerService},
     MessageNotificationService
