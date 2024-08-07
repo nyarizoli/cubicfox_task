@@ -37,6 +37,16 @@ export class NavbarComponent extends StoreManagerComponent implements OnInit, On
     this.cd.detectChanges();
   }
 
+  isDetails(): boolean {
+    return this.router.url.includes('details')
+  }
+
+  goBack(): void {
+    if (this.router.url.includes('users')) {
+      this.router.navigateByUrl('/users/list');
+    }
+  }
+
   isActiveItem(path: string): boolean {
     let moduleName: string = path.split('/')[0];
     return this.router.url.includes(moduleName);

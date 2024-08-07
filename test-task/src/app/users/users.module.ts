@@ -7,13 +7,15 @@ import { UsersService } from './services/users.service';
 import { UniversalDatatableComponent } from '../shared-components/universal-datatable/universal-datatable.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewUserDialogComponent } from './components/new-user-dialog/new-user-dialog.component';
+import { DetailsComponent } from './pages/details/details.component';
 
 
 
 @NgModule({
   declarations: [
     ListComponent,
-    NewUserDialogComponent
+    NewUserDialogComponent,
+    DetailsComponent
   ],
   imports: [
     CommonModule,

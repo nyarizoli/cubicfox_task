@@ -17,7 +17,7 @@ import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
 import {CommonModule, NgForOf, NgIf} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
-import {MatIconButton} from "@angular/material/button";
+import {MatButtonModule, MatIconButton} from "@angular/material/button";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {Router} from "@angular/router";
@@ -38,6 +38,7 @@ import {Router} from "@angular/router";
     MatFormFieldModule,
     MatInputModule,
     MatIconButton,
+    MatButtonModule,
     NgIf,
   ],
 })
@@ -45,11 +46,15 @@ export class UniversalDatatableComponent extends StoreManagerComponent implement
   subscriptions: Subscription[] = [];
 
   @Input()
+  haveDetails: boolean = false;
+  @Input()
   enablePaging: boolean = true;
   @Input()
   displayedColumns: any = [];
   @Input()
   tableData?: any = [];
+  @Input()
+  detailsBaseUrl: string = '';
 
   columnsToShow: any = [];
   dataSource?: any;
@@ -64,6 +69,12 @@ export class UniversalDatatableComponent extends StoreManagerComponent implement
 
   ngOnInit() {
     this.columnsToShow = this.displayedColumns.map((item: any) => item.value);
+    if (this.haveDetails) {
+      this.columnsToShow = [
+        ...this.columnsToShow,
+        'details'
+      ];
+    }
 
     this.dataSource = null;
     if (this.tableData) {
@@ -119,6 +130,11 @@ export class UniversalDatatableComponent extends StoreManagerComponent implement
         })
       )
     }
+  }
+
+  openDetails(element: any): void {
+    this.setUserDetails(element);
+    this.router.navigate([`${this.detailsBaseUrl}/${element.Id}`])
   }
 
   ngOnChanges(changes: SimpleChanges): void {

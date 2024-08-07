@@ -1,8 +1,7 @@
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { UsersService } from '../../services/users.service';
-import { USERS_TABLES_COLUMNS } from '../../../utils/constants/table/users/table.constants';
+import { USER_DETAILS_BASE_URL, USERS_TABLES_COLUMNS } from '../../../utils/constants/table/users/table.constants';
 import { StoreManagerComponent } from '../../../shared-components/store-manager/store-manager.component';
 import { Store } from '@ngrx/store';
 import { State } from '../../../store/models/state.model';
@@ -17,58 +16,19 @@ import { UserCreate } from '../../../store/models/user.model';
 })
 export class ListComponent extends StoreManagerComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
-  cols!: number;
 
   filter!: string;
 
   tableData!: any;
   columns = USERS_TABLES_COLUMNS;
+  detailBaseUrl = USER_DETAILS_BASE_URL;
 
-  gridByBreakpoint = {
-    xl: 3,
-    lg: 3,
-    md: 3,
-    sm: 2,
-    xs: 1
-  }
-
-  constructor(protected override store: Store<State>, private breakpointObserver: BreakpointObserver, private userService: UsersService, private dialog: MatDialog) {
+  constructor(protected override store: Store<State>, private userService: UsersService, private dialog: MatDialog) {
     super(store)
-    this.breakpointObserver.observe([
-      Breakpoints.XSmall,
-      Breakpoints.Small,
-      Breakpoints.Medium,
-      Breakpoints.Large,
-      Breakpoints.XLarge,
-    ]).subscribe(result => {
-      if (result.matches) {
-        if (result.breakpoints[Breakpoints.XSmall]) {
-          this.cols = this.gridByBreakpoint.xs;
-        }
-        if (result.breakpoints[Breakpoints.Small]) {
-          this.cols = this.gridByBreakpoint.sm;
-        }
-        if (result.breakpoints[Breakpoints.Medium]) {
-          this.cols = this.gridByBreakpoint.md;
-        }
-        if (result.breakpoints[Breakpoints.Large]) {
-          this.cols = this.gridByBreakpoint.lg;
-        }
-        if (result.breakpoints[Breakpoints.XLarge]) {
-          this.cols = this.gridByBreakpoint.xl;
-        }
-      }
-    });
   }
 
   ngOnInit(): void {
-    this.setLoading(true);
-    this.subscriptions.push(
-      this.userService.getUserList().subscribe(list => {
-        this.tableData = list
-        this.setLoading(false);
-      })
-    )
+    this.getUserList();
   }
 
   changeModel(event: any): void {
@@ -76,44 +36,20 @@ export class ListComponent extends StoreManagerComponent implements OnInit, OnDe
   }
 
   searchFilter(): void {
-    this.setLoading(true);
-    this.subscriptions.push(
-      this.userService.searchUserList(this.filter).subscribe(list => {
-        this.tableData = list
-        this.setLoading(false);
-      })
-    )
+    this.searchList();
   }
 
   refresh(): void {
     if (this.filter) {
-      this.setLoading(true);
-      this.subscriptions.push(
-        this.userService.searchUserList(this.filter).subscribe(list => {
-          this.tableData = list
-          this.setLoading(false);
-        })
-      )
+      this.searchList();
     } else {
-      this.setLoading(true);
-      this.subscriptions.push(
-        this.userService.getUserList().subscribe(list => {
-          this.tableData = list
-          this.setLoading(false);
-        })
-      )
+      this.getUserList();
     }
   }
 
   clearFilter(): void {
     this.filter = '';
-    this.setLoading(true);
-      this.subscriptions.push(
-        this.userService.getUserList().subscribe(list => {
-          this.tableData = list
-          this.setLoading(false);
-        })
-      )
+    this.getUserList();
   }
 
   addPerson(): void {
@@ -134,5 +70,25 @@ export class ListComponent extends StoreManagerComponent implements OnInit, OnDe
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
+  private getUserList(): void {
+    this.setLoading(true);
+    this.subscriptions.push(
+      this.userService.getUserList().subscribe(list => {
+        this.tableData = list
+        this.setLoading(false);
+      })
+    )
+  }
+
+  private searchList(): void {
+    this.setLoading(true);
+    this.subscriptions.push(
+      this.userService.searchUserList(this.filter).subscribe(list => {
+        this.tableData = list
+        this.setLoading(false);
+      })
+    )
   }
 }

@@ -31,27 +31,15 @@ export class AuthenticationComponent extends StoreManagerComponent implements On
       }
   }
 
-  loginCustom(): void {
+  login(custom: boolean): void {
     this.setLoading(true);
     this.subscriptions.push(
-      this.loginService.login(this.authFormGroup.getRawValue() as LoginCredentials).subscribe(token => {
+      this.loginService.login(custom ? this.authFormGroup.getRawValue() as LoginCredentials : {client_id: environment.CLIENT_ID, client_secret: environment.CLIENT_SECRET} as LoginCredentials).subscribe(token => {
         this.authService.storeToken(token.access_token);
-        this.setLoading(false);
-      }, err => {
-        this.setLoading(false);
-      })
-    )
-  }
-
-  login(): void {
-    this.setLoading(true);
-    this.subscriptions.push(
-      this.loginService.login({client_id: environment.CLIENT_ID, client_secret: environment.CLIENT_SECRET} as LoginCredentials).subscribe(token => {
-        this.authService.storeToken(token.access_token);
-        this.authFormGroup.get('client_id')?.setValue(environment.CLIENT_ID);
-        this.authFormGroup.get('client_secret')?.setValue(environment.CLIENT_SECRET);
-        this.setLoading(false);
-      }, err => {
+        if (!custom) {
+          this.authFormGroup.get('client_id')?.setValue(environment.CLIENT_ID);
+          this.authFormGroup.get('client_secret')?.setValue(environment.CLIENT_SECRET);
+        }
         this.setLoading(false);
       })
     )

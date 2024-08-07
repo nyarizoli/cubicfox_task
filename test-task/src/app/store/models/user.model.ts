@@ -3,3 +3,8 @@ export interface UserCreate {
   LastName: string;
   Email: string;
 }
+
+export interface UserDetails extends UserCreate {
+  Id: string;
+  FullName: string;
+}

@@ -16,3 +16,5 @@ export const USERS_TABLES_COLUMNS = [
     title: 'Email'
   },
 ];
+
+export const USER_DETAILS_BASE_URL='/users/details'

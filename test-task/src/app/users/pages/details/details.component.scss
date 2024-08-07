@@ -1,0 +1,31 @@
+:host {
+  margin: 1rem;
+
+  mat-card {
+    margin-top: 1rem;
+
+    mat-card-header {
+      height: 40px;
+      background-color: lightgray;
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+    }
+
+    mat-card-content {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+
+      .wrapper {
+        width: 40%;
+        .data {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          margin-top: 1rem;
+        }
+      }
+    }
+  }
+}
