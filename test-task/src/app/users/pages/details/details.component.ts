@@ -7,7 +7,9 @@ import { UserDetails } from '../../../store/models/user.model';
 import { USER_DETAILS_KEY } from '../../../utils/constants/keys/users/constants';
 import { USER_DETAILS_COLUMNS } from '../../../utils/constants/table/users/table.constants';
 import { UsersService } from '../../services/users.service';
-import { AbsenceItem } from '../../../store/models/absence.model';
+import { AbsenceCreateItem, AbsenceItem } from '../../../store/models/absence.model';
+import { MatDialog } from '@angular/material/dialog';
+import { NewAbsenceDialogComponent } from '../../components/new-absence-dialog/new-absence-dialog.component';
 
 @Component({
   selector: 'app-details',
@@ -21,7 +23,7 @@ export class DetailsComponent extends StoreManagerComponent implements OnInit, O
   tableData!: AbsenceItem[];
   columns = USER_DETAILS_COLUMNS;
 
-  constructor(protected override store: Store<State>, private userService: UsersService) {
+  constructor(protected override store: Store<State>, private userService: UsersService, private dialog: MatDialog) {
     super(store);
     this.setPageTitle('User Details')
   }
@@ -41,7 +43,21 @@ export class DetailsComponent extends StoreManagerComponent implements OnInit, O
     this.absenceList();
   }
 
-  addAbsence(): void {}
+  addAbsence(): void {
+    this.subscriptions.push(
+      this.dialog.open(NewAbsenceDialogComponent, {data: {Id: this.detailsData?.Id}}).afterClosed().subscribe((dialogData: AbsenceCreateItem | null) => {
+        if (dialogData) {
+          this.setLoading(true);
+          this.subscriptions.push(
+            this.userService.createAbsence(dialogData as AbsenceCreateItem).subscribe(created => {
+              this.setLoading(false);
+              this.absenceList();
+            })
+          )
+        }
+      })
+    )
+  }
 
   ngOnDestroy() {
     this.setUserDetails(null);

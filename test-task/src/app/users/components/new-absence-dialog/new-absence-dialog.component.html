@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Add new absence</h2>
+<div mat-dialog-content>
+  <form [formGroup]="newAbsenceForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Absence Definitions</mat-label>
+      <mat-select (selectionChange)="selectChanged($event)">
+        <mat-option *ngFor="let def of absenceDefinitions"  [value]="def.Id">{{def.CategoryDefinitionName}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Comment</mat-label>
+      <input matInput autocomplete="off" formControlName="Comment" type="text">
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button (click)="create()" [disabled]="!selected" mat-flat-button color="primary"><mat-icon>add</mat-icon> Add absence</button>
+  <button (click)="cancel()" mat-stroked-button color="primary"><mat-icon>close</mat-icon> Cancel</button>
+</div>

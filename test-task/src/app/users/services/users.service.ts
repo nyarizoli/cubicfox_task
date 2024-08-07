@@ -5,8 +5,8 @@ import { map, Observable } from 'rxjs';
 import { USER_LIST_ENDPOINT, USER_LIST_SEARCH_ENDPOINT } from '../../utils/constants/endpoints/users/constants';
 import { AuthService } from '../../services/auth.service';
 import { UserItem } from '../../store/models/user.model';
-import { ABSENCES_LIST_ENDPOINT } from '../../utils/constants/endpoints/absences/constants';
-import { AbsenceItem } from '../../store/models/absence.model';
+import { ABSENCES_DEFINITION_LIST_ENDPOINT, ABSENCES_LIST_ENDPOINT } from '../../utils/constants/endpoints/absences/constants';
+import { AbsenceCreateItem, AbsenceDefinitionItem, AbsenceItem } from '../../store/models/absence.model';
 
 @Injectable({
   providedIn: UsersModule
@@ -36,6 +36,14 @@ export class UsersService {
 
   getUserAbsenceList(searchTerm: string): Observable<AbsenceItem[]> {
     return this.http.get<AbsenceItem[]>(`${ABSENCES_LIST_ENDPOINT}?searchTerm=${searchTerm}`, {headers: this.httpHeaders}).pipe(map((data: AbsenceItem[]) => this.mapListData(data)));
+  }
+
+  getAbsenceDefinitionList(): Observable<AbsenceDefinitionItem[]> {
+    return this.http.get<AbsenceDefinitionItem[]>(ABSENCES_DEFINITION_LIST_ENDPOINT, {headers: this.httpHeaders});
+  }
+
+  createAbsence(toSave: AbsenceCreateItem): Observable<any> {
+    return this.http.post(ABSENCES_LIST_ENDPOINT, toSave, {headers: this.httpHeaders});
   }
 
   private mapListData(data: AbsenceItem[]): AbsenceItem[] {

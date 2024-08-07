@@ -8,6 +8,7 @@ import { UniversalDatatableComponent } from '../shared-components/universal-data
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewUserDialogComponent } from './components/new-user-dialog/new-user-dialog.component';
 import { DetailsComponent } from './pages/details/details.component';
+import { NewAbsenceDialogComponent } from './components/new-absence-dialog/new-absence-dialog.component';
 
 
 
@@ -15,7 +16,8 @@ import { DetailsComponent } from './pages/details/details.component';
   declarations: [
     ListComponent,
     NewUserDialogComponent,
-    DetailsComponent
+    DetailsComponent,
+    NewAbsenceDialogComponent
   ],
   imports: [
     CommonModule,
