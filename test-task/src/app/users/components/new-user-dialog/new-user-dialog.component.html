@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Add new user</h2>
+<div mat-dialog-content>
+  <form [formGroup]="newUserForm">
+    <mat-form-field appearance="fill">
+      <mat-label>First Name</mat-label>
+      <input matInput autocomplete="off" formControlName="FirstName" type="text">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Last Name</mat-label>
+      <input matInput autocomplete="off" formControlName="LastName" type="text">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput autocomplete="off" formControlName="Email" type="text">
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button (click)="create()" [disabled]="!newUserForm.valid" mat-flat-button color="primary"><mat-icon>add</mat-icon> Add user</button>
+  <button (click)="cancel()" mat-stroked-button color="primary"><mat-icon>close</mat-icon> Cancel</button>
+</div>

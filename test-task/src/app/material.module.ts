@@ -11,6 +11,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatSortModule} from "@angular/material/sort";
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   imports: [
@@ -25,7 +29,11 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatFormFieldModule,
     MatToolbarModule,
     MatInputModule,
-    MatGridListModule
+    MatGridListModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule,
+    MatDialogModule
   ],
   exports: [
     MatSidenavModule,
@@ -39,7 +47,11 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatGridListModule
+    MatGridListModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule,
+    MatDialogModule
   ]
 })
 export class MaterialModule { }

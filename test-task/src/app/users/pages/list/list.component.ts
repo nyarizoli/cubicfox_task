@@ -6,6 +6,9 @@ import { USERS_TABLES_COLUMNS } from '../../../utils/constants/table/users/table
 import { StoreManagerComponent } from '../../../shared-components/store-manager/store-manager.component';
 import { Store } from '@ngrx/store';
 import { State } from '../../../store/models/state.model';
+import { MatDialog } from '@angular/material/dialog';
+import { NewUserDialogComponent } from '../../components/new-user-dialog/new-user-dialog.component';
+import { UserCreate } from '../../../store/models/user.model';
 
 @Component({
   selector: 'app-user-list',
@@ -29,7 +32,7 @@ export class ListComponent extends StoreManagerComponent implements OnInit, OnDe
     xs: 1
   }
 
-  constructor(protected override store: Store<State>, private breakpointObserver: BreakpointObserver, private userService: UsersService) {
+  constructor(protected override store: Store<State>, private breakpointObserver: BreakpointObserver, private userService: UsersService, private dialog: MatDialog) {
     super(store)
     this.breakpointObserver.observe([
       Breakpoints.XSmall,
@@ -113,7 +116,21 @@ export class ListComponent extends StoreManagerComponent implements OnInit, OnDe
       )
   }
 
-  addPerson(): void {}
+  addPerson(): void {
+    this.subscriptions.push(
+      this.dialog.open(NewUserDialogComponent).afterClosed().subscribe((dialogData: UserCreate | null) => {
+        if (dialogData) {
+          this.setLoading(true);
+          this.subscriptions.push(
+            this.userService.addUser(dialogData as UserCreate).subscribe(created => {
+              this.setLoading(false);
+              this.refresh();
+            })
+          )
+        }
+      })
+    )
+  }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
