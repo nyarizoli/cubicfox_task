@@ -56,7 +56,7 @@ export class UniversalDatatableComponent extends StoreManagerComponent implement
   @Input()
   detailsBaseUrl: string = '';
 
-  columnsToShow: any = [];
+  columnsToShow: string[] = [];
   dataSource?: any;
   emptyData = new MatTableDataSource([{ empty: "row" }]);
 

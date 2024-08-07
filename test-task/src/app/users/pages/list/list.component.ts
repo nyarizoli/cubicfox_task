@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { State } from '../../../store/models/state.model';
 import { MatDialog } from '@angular/material/dialog';
 import { NewUserDialogComponent } from '../../components/new-user-dialog/new-user-dialog.component';
-import { UserCreate } from '../../../store/models/user.model';
+import { UserItem } from '../../../store/models/user.model';
 
 @Component({
   selector: 'app-user-list',
@@ -19,7 +19,7 @@ export class ListComponent extends StoreManagerComponent implements OnInit, OnDe
 
   filter!: string;
 
-  tableData!: any;
+  tableData!: UserItem[];
   columns = USERS_TABLES_COLUMNS;
   detailBaseUrl = USER_DETAILS_BASE_URL;
 
@@ -54,11 +54,11 @@ export class ListComponent extends StoreManagerComponent implements OnInit, OnDe
 
   addPerson(): void {
     this.subscriptions.push(
-      this.dialog.open(NewUserDialogComponent).afterClosed().subscribe((dialogData: UserCreate | null) => {
+      this.dialog.open(NewUserDialogComponent).afterClosed().subscribe((dialogData: UserItem | null) => {
         if (dialogData) {
           this.setLoading(true);
           this.subscriptions.push(
-            this.userService.addUser(dialogData as UserCreate).subscribe(created => {
+            this.userService.addUser(dialogData as UserItem).subscribe(created => {
               this.setLoading(false);
               this.refresh();
             })

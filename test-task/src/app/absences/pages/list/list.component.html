@@ -1,8 +1,21 @@
 <mat-card>
   <mat-card-header>
-    Absences list
+    Absence list
   </mat-card-header>
   <mat-card-content>
-
+    <div class="search-wrapper">
+      <mat-form-field>
+        <mat-label>Date from</mat-label>
+        <input matInput [ngModel]="filter" (ngModelChange)="changeModel($event)" [matDatepicker]="picker">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <div class="search-buttons">
+        <button (click)="searchFilter()" [disabled]="!filter" mat-flat-button color="primary"><mat-icon>search</mat-icon> Search</button>
+        <button (click)="clear()" mat-stroked-button color="primary"><mat-icon>close</mat-icon> Clear</button>
+        <button (click)="refresh()" mat-stroked-button color="primary"><mat-icon>refresh</mat-icon> Refresh list</button>
+      </div>
+    </div>
+    <app-universal-datatable [enablePaging]="true" [haveDetails]="false" [displayedColumns]="columns" [tableData]="tableData"></app-universal-datatable>
   </mat-card-content>
 </mat-card>

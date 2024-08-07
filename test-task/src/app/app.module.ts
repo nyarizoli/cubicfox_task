@@ -15,6 +15,7 @@ import { ToolbarComponent } from './shared-components/toolbar/toolbar.component'
 import { StoreModule } from '@ngrx/store';
 import { REDUCERS } from './store/reducers/reducers';
 import { provideHttpClient } from '@angular/common/http';
+import {provideNativeDateAdapter} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { provideHttpClient } from '@angular/common/http';
   providers: [
     provideAnimationsAsync(),
     provideHttpClient(),
+    provideNativeDateAdapter(),
     {provide: ErrorHandler, useClass: GlobalErrorHandlerService},
     MessageNotificationService
   ],

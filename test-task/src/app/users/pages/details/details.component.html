@@ -43,10 +43,11 @@
 </mat-card>
 
 <mat-card>
-  <mat-card-header>
-    Manage absences
+  <mat-card-header class="absence-header">
+    <span>Manage absences</span>
+    <button (click)="addAbsence()" mat-flat-button color="primary"><mat-icon>add</mat-icon> Add absence</button>
   </mat-card-header>
   <mat-card-content>
-
+    <app-universal-datatable [enablePaging]="true" [displayedColumns]="columns" [tableData]="tableData"></app-universal-datatable>
   </mat-card-content>
 </mat-card>

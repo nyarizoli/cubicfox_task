@@ -5,10 +5,30 @@
     mat-card-header {
       height: 40px;
       background-color: lightgray;
+      padding: 0.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     mat-card-content {
       margin-top: 1rem;
+
+      .search-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        mat-form-field {
+          width: 40%;
+        }
+
+        .search-buttons {
+          button {
+            margin: 0.5rem;
+          }
+        }
+      }
     }
   }
 }

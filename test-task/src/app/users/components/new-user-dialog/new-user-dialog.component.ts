@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {MatDialogRef} from "@angular/material/dialog";
-import { UserCreate } from '../../../store/models/user.model';
+import { UserItem } from '../../../store/models/user.model';
 
 @Component({
   selector: 'app-new-user-dialog',
@@ -16,7 +16,7 @@ export class NewUserDialogComponent {
   }
 
   create(): void {
-    this.dialogRef.close(this.newUserForm.getRawValue() as UserCreate)
+    this.dialogRef.close(this.newUserForm.getRawValue() as UserItem)
   }
 
   cancel(): void {

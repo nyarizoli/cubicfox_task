@@ -10,6 +10,11 @@
       padding: 0.5rem;
       display: flex;
       align-items: center;
+      justify-content: center;
+    }
+
+    .absence-header {
+      justify-content: space-between;
     }
 
     mat-card-content {
