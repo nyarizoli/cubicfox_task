@@ -1,0 +1,25 @@
+Unfortunately I had no enough time to grant this home project at the desired way, but I was already on my vacation when I finished
+
+So i would like to take a short note about known parts that could be a little more clean and affective if I had enough time
+
+- Tests:
+    I also mentioned the test parts in some of the service test files, but the mock data and the used string could be exported and organized by constants
+    More test cases could be made for services as I mention in the users service test files
+    I had only time to make test cases for services, but of course in case of enough time I would like to make unit tests for the components too
+    And I also prefer to make Cypress function tests too
+
+You will notice that in most components I managed to avoid memory leaks by subscriptions arrays and lifecycle actions, but It could be done maybe by less code duplication if I made
+like a base class for the default component subscription and lifecycle handling and just extends it where it is needed, as the Store manager
+
+Maybe the dialogs for adding a person and for adding an absence could be done by one reusable and configurable dialog component by dynamic params and etc
+
+The loading screen handled by the state store, and it can be improved by instead of starts and stops from every components with calls, by handling it from an interceptor
+Also the message service with the error and success messages to notice the user, it also could be handled from an interceptor instead of manual commands
+
+As in the tests there are some places where I used a string just in the file, that cases can also be improved by extracting those strings to constants
+
+At the top of the lists, so the filter and action buttons section also could be refactored to one reusable and configurable component to avoid code duplication in list components
+
+The content of the list also can be improved if the api would be able to send pageable response and that can be reduce the initial loading time of the list, also in that case
+the handling of caching could be an option
+Also if I include the list content handling at the state/store management, the details page and the request / data in connection could be automatized with some state effects

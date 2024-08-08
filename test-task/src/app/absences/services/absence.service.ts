@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AbsencesModule } from '../absences.module';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { ABSENCES_LIST_ENDPOINT } from '../../utils/constants/endpoints/absences/constants';
 import { AbsenceListItem } from '../../store/models/absence.model';
 
 @Injectable({
-  providedIn: AbsencesModule
+  providedIn: 'root'
 })
 export class AbsenceService {
   constructor(private http: HttpClient) {}

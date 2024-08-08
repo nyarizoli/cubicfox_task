@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { AbsencesRoutingModule } from './absences-routing.module';
 import { ListComponent } from './pages/list/list.component';
 import { MaterialModule } from '../material.module';
-import { AbsenceService } from './services/absence.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UniversalDatatableComponent } from '../shared-components/universal-datatable/universal-datatable.component';
 
@@ -21,6 +20,6 @@ import { UniversalDatatableComponent } from '../shared-components/universal-data
     MaterialModule,
     UniversalDatatableComponent
   ],
-  providers: [AbsenceService]
+  providers: []
 })
 export class AbsencesModule { }

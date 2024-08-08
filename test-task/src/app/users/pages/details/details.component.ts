@@ -10,6 +10,7 @@ import { UsersService } from '../../services/users.service';
 import { AbsenceCreateItem, AbsenceItem } from '../../../store/models/absence.model';
 import { MatDialog } from '@angular/material/dialog';
 import { NewAbsenceDialogComponent } from '../../components/new-absence-dialog/new-absence-dialog.component';
+import { MessageNotificationService } from '../../../utils/message/message.service';
 
 @Component({
   selector: 'app-details',
@@ -23,7 +24,7 @@ export class DetailsComponent extends StoreManagerComponent implements OnInit, O
   tableData!: AbsenceItem[];
   columns = USER_DETAILS_COLUMNS;
 
-  constructor(protected override store: Store<State>, private userService: UsersService, private dialog: MatDialog) {
+  constructor(protected override store: Store<State>, private userService: UsersService, private dialog: MatDialog, private messageService: MessageNotificationService) {
     super(store);
     this.setPageTitle('User Details')
   }
@@ -51,6 +52,7 @@ export class DetailsComponent extends StoreManagerComponent implements OnInit, O
           this.subscriptions.push(
             this.userService.createAbsence(dialogData as AbsenceCreateItem).subscribe(created => {
               this.setLoading(false);
+              this.messageService.showSuccess('Message successfully added!')
               this.absenceList();
             })
           )

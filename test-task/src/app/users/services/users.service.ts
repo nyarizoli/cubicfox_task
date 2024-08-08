@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
-import { UsersModule } from '../users.module';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { USER_LIST_ENDPOINT, USER_LIST_SEARCH_ENDPOINT } from '../../utils/constants/endpoints/users/constants';
-import { AuthService } from '../../services/auth.service';
 import { UserItem } from '../../store/models/user.model';
 import { ABSENCES_DEFINITION_LIST_ENDPOINT, ABSENCES_LIST_ENDPOINT } from '../../utils/constants/endpoints/absences/constants';
 import { AbsenceCreateItem, AbsenceDefinitionItem, AbsenceItem } from '../../store/models/absence.model';
 
 @Injectable({
-  providedIn: UsersModule
+  providedIn: 'root'
 })
 export class UsersService {
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient) {}
 
   getUserList(): Observable<UserItem[]> {
     return this.http.get<UserItem[]>(USER_LIST_ENDPOINT);

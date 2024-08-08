@@ -8,6 +8,7 @@ import { State } from '../../../store/models/state.model';
 import { MatDialog } from '@angular/material/dialog';
 import { NewUserDialogComponent } from '../../components/new-user-dialog/new-user-dialog.component';
 import { UserItem } from '../../../store/models/user.model';
+import { MessageNotificationService } from '../../../utils/message/message.service';
 
 @Component({
   selector: 'app-user-list',
@@ -23,7 +24,7 @@ export class ListComponent extends StoreManagerComponent implements OnInit, OnDe
   columns = USERS_TABLES_COLUMNS;
   detailBaseUrl = USER_DETAILS_BASE_URL;
 
-  constructor(protected override store: Store<State>, private userService: UsersService, private dialog: MatDialog) {
+  constructor(protected override store: Store<State>, private userService: UsersService, private dialog: MatDialog, private messageService: MessageNotificationService) {
     super(store)
   }
 
@@ -60,6 +61,7 @@ export class ListComponent extends StoreManagerComponent implements OnInit, OnDe
           this.subscriptions.push(
             this.userService.addUser(dialogData as UserItem).subscribe(created => {
               this.setLoading(false);
+              this.messageService.showSuccess('Person successfully added!')
               this.refresh();
             })
           )

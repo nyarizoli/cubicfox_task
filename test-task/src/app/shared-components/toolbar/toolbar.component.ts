@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {StoreManagerComponent} from "../store-manager/store-manager.component";
 import {Store} from "@ngrx/store";
 import {State} from "../../store/models/state.model";
@@ -10,13 +10,11 @@ import { USERNAME_KEY } from '../../utils/constants/keys/authentication/authenti
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.scss'
 })
-export class ToolbarComponent extends StoreManagerComponent implements OnInit, OnDestroy {
+export class ToolbarComponent extends StoreManagerComponent implements OnDestroy {
   subscriptions: Subscription[] = [];
   constructor(protected override store: Store<State>) {
     super(store);
   }
-
-  ngOnInit() {}
 
   getUsername(): string | null {
     return localStorage.getItem(USERNAME_KEY);
